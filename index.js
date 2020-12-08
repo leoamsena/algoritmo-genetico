@@ -15,22 +15,35 @@ class AG {
 
         const selecionados = [];
 
-        let candidatosSelecao = this.geracoes[geracaoAtual];
+        let candidatosSelecao = [...this.geracoes[geracaoAtual]];
 
         for (let aux = 0; aux < 2; aux++) {
-            const aptidoes = candidatosSelecao.map(item => this.aptidao(item));
-            const somaAptidoes = aptidoes.reduce((acc, item) => acc + item, 0);
+            const aptidoes = candidatosSelecao.map(item => ({ apitidao: this.aptidao(item), numero: item }));
+            const somaAptidoes = aptidoes.reduce((acc, item) => acc + item.apitidao, 0);
+            const porcentagemAptidoes = aptidoes.map(item => ({ porcentagem: item.apitidao / somaAptidoes, numero: item.numero }));
+
+            porcentagemAptidoes.sort((a, b) => {
+                if (a.porcentagem > b.porcentagem)
+                    return -1;
+                if (a.porcentagem < b.porcentagem)
+                    return 1;
+                return 0;
+            });
             let contador = 0,
                 i = 0;
             const random = Math.random();
-            while (random >= contador) {
-                contador += (aptidoes[i] / somaAptidoes);
+            while (random > contador) {
+                contador += porcentagemAptidoes[i].porcentagem;
                 i += 1;
-
             }
-            const candidato = candidatosSelecao[i - 1];
+            const candidato = porcentagemAptidoes[i - 1].numero;
+            console.log(candidato, random, porcentagemAptidoes);
+
             selecionados.push(candidato);
-            candidatosSelecao = candidatosSelecao.filter(item => item !== candidato)
+            //candidatosSelecao = candidatosSelecao.filter(item => item !== candidato);
+
+            const pos = candidatosSelecao.indexOf(candidato);
+            candidatosSelecao.splice(pos, 1);
 
         }
         return selecionados;
@@ -70,15 +83,22 @@ class AG {
     }
     mutacao(individuo) {
         const individuoBinario = this.decToBin(individuo);
+
+
+        console.log("MUTACAO");
         const individuoMutado = individuoBinario.split("").map(char => {
             const random = Math.random();
             if (random <= this.taxaMutacao)
-                return char === '0' ? '1' : '0';
+                return (char === '0' ? '1' : '0');
             return char;
         }).join("");
         const individuoDec = this.binToDec(individuoMutado);
-
-        return (individuoDec > 10 || individuoDec < -10) ? individuo : individuoDec;
+        if (individuoDec > 10)
+            return 10;
+        if (individuoDec < -10)
+            return -10;
+        return individuoDec;
+        //return (individuoDec > 10 || individuoDec < -10) ? individuo : individuoDec;
     }
     geraPopulacaoInicial() {
         const arr = new Array(this.tamanhoInicial).fill().map(() => Math.floor(Math.random() * 21) - 10);
@@ -93,10 +113,10 @@ class AG {
 }
 
 function algoritmoGenetico() {
-    let tamPop = 30;
+    let tamPop = 4;
     if (tamPop % 2 !== 0)
         tamPop += 1;
-    const ag = new AG(tamPop, 0.1, 0.7, 20);
+    const ag = new AG(tamPop, 0.01, 0.7, 10);
     ag.geraPopulacaoInicial();
     let podeEvoluir = true;
     while (podeEvoluir) {
