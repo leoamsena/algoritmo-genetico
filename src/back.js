@@ -78,8 +78,11 @@ class AG {
         });
         let filho1 = this.binToDec(partes[0][0] + partes[1][1]);
         let filho2 = this.binToDec(partes[1][0] + partes[0][1]);
-        if (filho1 > 10 || filho1 < -10) filho1 = selecionados[0];
-        if (filho2 > 10 || filho2 < -10) filho2 = selecionados[1];
+        if (filho1 > 10) filho1 = 10;
+        else if (filho1 < -10) filho1 = -10;
+
+        if (filho2 > 10) filho2 = 10;
+        else if (filho2 < -10) filho2 = -10;
         return [filho1, filho2];
     }
     mutacao(individuo) {
