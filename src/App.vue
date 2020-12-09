@@ -172,15 +172,13 @@ export default {
           size: 5,
         });
       });
-      console.log(this.options.markers.discrete, x);
     },
     funcao(x) {
       return x ** 2 - 3 * x + 4;
     },
     sinalizarMudanca() {
-      this.options = { ...this.options, novo: "atualizou" };
+      this.options = { ...this.options };
       this.series = [...this.series];
-      console.log(this.options);
     },
     gerarEstadoInicial() {
       if (this.maxGeracoes > 0 && this.nIndividuos > 0) {
