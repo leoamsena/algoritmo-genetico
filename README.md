@@ -31,7 +31,7 @@ Para criação de um servidor local de desenvolvimento são necessários atender
 #### Requisitos
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en/)
-- [NPM](https://www.npmjs.com/)
+
 
 #### Instruções
 Os comandos abaixo devem ser executados no terminal:
