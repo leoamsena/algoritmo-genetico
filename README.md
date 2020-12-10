@@ -6,9 +6,9 @@ Conteúdo do arquivo
 ---------------	
 
 - O código fonte para o trabalho se encontra dentro da pasta src.
--- O arquivo main.js é o arquivo inicial da aplicação frontend desenvolvida em - Vue.js.
--- O arquivo back.js é o arquivo que possui a classe e a função que contém toda a lógica do algoritmo genético.
--- O arquivo App.vue têm as marcações e estilos para o frontend, além de possuir uma parte de lógica que interage com o arquivo back.js para executar e exibir resultados do algoritmo.
+    - O arquivo main.js é o arquivo inicial da aplicação frontend desenvolvida em - Vue.js.
+    - O arquivo back.js é o arquivo que possui a classe e a função que contém toda a lógica do algoritmo genético.
+    - O arquivo App.vue têm as marcações e estilos para o frontend, além de possuir uma parte de lógica que interage com o arquivo back.js para executar e exibir resultados do algoritmo.
 - A pasta distLocal contem arquivos para execução local, que será detalhada na seção  'Execução local em browser'.
 - A pasta dist contem arquivos para execução em servidor HTTP e não deve ser utilizada.
 - Demais arquivos dizem respeito ao gerenciador de dependências NPM e ao gerenciamento de versões Git.
